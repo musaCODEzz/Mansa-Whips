@@ -66,12 +66,14 @@ export default function AdminLogin({ onSuccess, onCancel }: AdminLoginProps) {
         {/* Input Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2 text-left font-mono text-xs">
-            <label className="text-[9px] uppercase tracking-[0.2em] text-[#C2C2BB]/50 font-bold block">
+            <label htmlFor="admin-passcode" className="text-[9px] uppercase tracking-[0.2em] text-[#C2C2BB]/50 font-bold block">
               Enter Administrative Passcode
             </label>
             <div className="relative">
               <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
               <input
+                id="admin-passcode"
+                name="admin-passcode"
                 type={showPasscode ? 'text' : 'password'}
                 required
                 value={passcode}

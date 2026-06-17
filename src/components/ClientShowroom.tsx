@@ -782,8 +782,10 @@ export default function ClientShowroom({
                 className="bg-[#0B0B0C] border border-white/10 p-6 md:p-8 rounded-none shadow-2xl grid grid-cols-1 md:grid-cols-3 gap-6"
               >
                 <div className="space-y-1.5 text-left">
-                  <label className="text-[9px] font-mono uppercase text-[#C2C2BB]/50 tracking-[0.15em]">Select Maker</label>
+                  <label htmlFor="quick-make" className="text-[9px] font-mono uppercase text-[#C2C2BB]/50 tracking-[0.15em]">Select Maker</label>
                   <select 
+                    id="quick-make"
+                    name="quick-make"
                     value={hpMake}
                     onChange={(e) => setHpMake(e.target.value)}
                     className="w-full bg-white/[0.02] border-b border-white/10 p-2.5 text-[#F5F5F0] font-mono text-xs border-r-0 border-l-0 border-t-0 focus:ring-0 outline-none uppercase"
@@ -798,8 +800,10 @@ export default function ClientShowroom({
                 </div>
 
                 <div className="space-y-1.5 text-left">
-                  <label className="text-[9px] font-mono uppercase text-[#C2C2BB]/50 tracking-[0.15em]">Maximum Price (KSH)</label>
+                  <label htmlFor="quick-price" className="text-[9px] font-mono uppercase text-[#C2C2BB]/50 tracking-[0.15em]">Maximum Price (KSH)</label>
                   <select 
+                    id="quick-price"
+                    name="quick-price"
                     value={hpPrice}
                     onChange={(e) => setHpPrice(e.target.value)}
                     className="w-full bg-white/[0.02] border-b border-white/10 p-2.5 text-[#F5F5F0] font-mono text-xs border-r-0 border-l-0 border-t-0 focus:ring-0 outline-none uppercase"
@@ -934,10 +938,12 @@ export default function ClientShowroom({
 
                   {/* Filter Search */}
                   <div className="space-y-1.5 text-left">
-                    <label className="text-[8.5px] font-mono uppercase tracking-[0.15em] text-[#C2C2BB]/50">Search Name</label>
+                    <label htmlFor="showroom-search" className="text-[8.5px] font-mono uppercase tracking-[0.15em] text-[#C2C2BB]/50">Search Name</label>
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 text-[#C2C2BB]/40" />
                       <input 
+                        id="showroom-search"
+                        name="showroom-search"
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
@@ -949,8 +955,10 @@ export default function ClientShowroom({
 
                   {/* Make Accordion Filter */}
                   <div className="space-y-1.5 text-left">
-                    <label className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">German Manufacturer</label>
+                    <label htmlFor="showroom-make" className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">German Manufacturer</label>
                     <select 
+                      id="showroom-make"
+                      name="showroom-make"
                       value={selectedMake}
                       onChange={(e) => setSelectedMake(e.target.value)}
                       className="w-full bg-[#050505] p-2 border border-white/10 text-white font-mono text-[10.5px] outline-none rounded-none focus:border-white/30"
@@ -963,8 +971,10 @@ export default function ClientShowroom({
 
                   {/* Year Filter */}
                   <div className="space-y-1.5 text-left">
-                    <label className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">Model Year</label>
+                    <label htmlFor="showroom-year" className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">Model Year</label>
                     <select 
+                      id="showroom-year"
+                      name="showroom-year"
                       value={selectedYear}
                       onChange={(e) => setSelectedYear(e.target.value)}
                       className="w-full bg-[#050505] p-2 border border-white/10 text-white font-mono text-[10.5px] outline-none rounded-none focus:border-white/30"
@@ -978,8 +988,10 @@ export default function ClientShowroom({
 
                   {/* Fuel Filter */}
                   <div className="space-y-1.5 text-left">
-                    <label className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">Fuel Feed</label>
+                    <label htmlFor="showroom-fuel" className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">Fuel Feed</label>
                     <select 
+                      id="showroom-fuel"
+                      name="showroom-fuel"
                       value={selectedFuel}
                       onChange={(e) => setSelectedFuel(e.target.value)}
                       className="w-full bg-[#050505] p-2 border border-white/10 text-white font-mono text-[10.5px] outline-none rounded-none focus:border-white/30"
@@ -992,8 +1004,10 @@ export default function ClientShowroom({
 
                   {/* Gearbox filter */}
                   <div className="space-y-1.5 text-left">
-                    <label className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">Transmission Gearbox</label>
+                    <label htmlFor="showroom-transmission" className="text-[8.5px] font-mono text-[#C2C2BB]/50 uppercase tracking-[0.15em]">Transmission Gearbox</label>
                     <select 
+                      id="showroom-transmission"
+                      name="showroom-transmission"
                       value={selectedTransmission}
                       onChange={(e) => setSelectedTransmission(e.target.value)}
                       className="w-full bg-[#050505] p-2 border border-white/10 text-white font-mono text-[10.5px] outline-none rounded-none focus:border-white/30"
@@ -1008,10 +1022,12 @@ export default function ClientShowroom({
                   {/* Price budget slider */}
                   <div className="space-y-2 text-left pt-2 border-t border-white/5">
                     <div className="flex justify-between items-center text-[8.5px] font-mono uppercase text-[#C2C2BB]/50">
-                      <span>Max Price Limit</span>
+                      <label htmlFor="showroom-price">Max Price Limit</label>
                       <span className="text-white">{(maxPrice / 1000000).toFixed(0)}M KSH</span>
                     </div>
                     <input 
+                      id="showroom-price"
+                      name="showroom-price"
                       type="range"
                       min={10000000}
                       max={60000000}
@@ -1050,8 +1066,11 @@ export default function ClientShowroom({
                   </span>
 
                   <div className="flex items-center gap-2 text-[10px] font-mono uppercase text-[#C2C2BB]/60">
+                    <label htmlFor="showroom-sort" className="sr-only">Sort by</label>
                     <span>Sort by:</span>
                     <select 
+                      id="showroom-sort"
+                      name="showroom-sort"
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
                       className="bg-transparent text-white border-none py-0 focus:ring-0 outline-none uppercase font-semibold tracking-wider text-[10px]"

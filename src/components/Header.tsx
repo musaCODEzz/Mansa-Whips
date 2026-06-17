@@ -57,7 +57,10 @@ export default function Header({ title, searchQuery, setSearchQuery, showSearch 
         {showSearch && (
           <div className="hidden lg:flex items-center bg-white/[0.02] rounded-none px-4 py-1.5 border border-white/10 focus-within:border-white/30 transition-colors">
             <Search className="text-[#C2C2BB]/60 w-3.5 h-3.5 mr-2" />
+            <label htmlFor="header-search" className="sr-only">Search</label>
             <input
+              id="header-search"
+              name="header-search"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

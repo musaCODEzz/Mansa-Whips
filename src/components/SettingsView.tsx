@@ -82,8 +82,10 @@ export default function SettingsView({
             </div>
             <form onSubmit={handleSaveProfile} className="space-y-4">
               <div className="space-y-1.5">
-                <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em]">Showroom Administrator Username</label>
+                <label htmlFor="settings-username" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em]">Showroom Administrator Username</label>
                 <input
+                  id="settings-username"
+                  name="settings-username"
                   type="text"
                   value={profileName}
                   onChange={(e) => setProfileName(e.target.value)}
@@ -92,8 +94,10 @@ export default function SettingsView({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em]">Showroom Location / Greet Timezone</label>
+                <label htmlFor="settings-timezone" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em]">Showroom Location / Greet Timezone</label>
                 <select
+                  id="settings-timezone"
+                  name="settings-timezone"
                   value={timezone}
                   onChange={(e) => setTimezone(e.target.value)}
                   className="w-full bg-[#0B0B0C] border-b border-white/10 focus:border-white/30 text-[#F5F5F0] p-2.5 focus:ring-0 border-t-0 border-r-0 border-l-0 rounded-none h-11 outline-none"

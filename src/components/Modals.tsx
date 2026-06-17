@@ -213,9 +213,11 @@ export function InquiryDetailsModal({
 
           {/* Internal staff memorandum log */}
           <form onSubmit={handleSaveComment} className="pt-3 border-t border-white/10 space-y-2">
-            <label className="text-[#C2C2BB]/40 uppercase text-[9px] block tracking-[0.15em] font-medium">Log Internal memo notes</label>
+            <label htmlFor="inquiry-memo-notes" className="text-[#C2C2BB]/40 uppercase text-[9px] block tracking-[0.15em] font-medium">Log Internal memo notes</label>
             <div className="flex gap-2">
               <input
+                id="inquiry-memo-notes"
+                name="inquiry-memo-notes"
                 type="text"
                 value={commentInput}
                 onChange={(e) => setCommentInput(e.target.value)}
@@ -382,8 +384,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
 
         <div className="space-y-3">
           <div className="space-y-1">
-            <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Showroom Valuer Price (KSH)</label>
+            <label htmlFor="edit-price" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Showroom Valuer Price (KSH)</label>
             <input
+              id="edit-price"
+              name="edit-price"
               type="number"
               required
               value={price}
@@ -394,8 +398,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Exterior Paint Code</label>
+              <label htmlFor="edit-color" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Exterior Paint Code</label>
               <input
+                id="edit-color"
+                name="edit-color"
                 type="text"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
@@ -405,8 +411,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
             </div>
             
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Pipeline Inventory Stage</label>
+              <label htmlFor="edit-status" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Pipeline Inventory Stage</label>
               <select
+                id="edit-status"
+                name="edit-status"
                 value={status}
                 onChange={(e) => setStatus(e.target.value as any)}
                 className="w-full bg-[#0B0B0C] border-b border-white/10 focus:border-white/30 text-[#F5F5F0] p-2.5 focus:ring-0 border-t-0 border-r-0 border-l-0 rounded-none h-11 h-12 outline-none uppercase"
@@ -470,9 +478,11 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
               )}
             </div>
             <div className="space-y-1 flex flex-col justify-end">
+              <label htmlFor="edit-vehicle-file" className="sr-only">Upload Vehicle Image</label>
               <input 
                 type="file" 
                 id="edit-vehicle-file" 
+                name="edit-vehicle-file" 
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
@@ -516,8 +526,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Engine Spec</label>
+              <label htmlFor="edit-engine" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Engine Spec</label>
               <input
+                id="edit-engine"
+                name="edit-engine"
                 type="text"
                 value={engine}
                 onChange={(e) => setEngine(e.target.value)}
@@ -525,8 +537,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Gearbox Type</label>
+              <label htmlFor="edit-transmission" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Gearbox Type</label>
               <input
+                id="edit-transmission"
+                name="edit-transmission"
                 type="text"
                 value={transmission}
                 onChange={(e) => setTransmission(e.target.value)}
@@ -537,8 +551,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Mileage (KM)</label>
+              <label htmlFor="edit-mileage" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Mileage (KM)</label>
               <input
+                id="edit-mileage"
+                name="edit-mileage"
                 type="number"
                 value={mileage}
                 onChange={(e) => setMileage(e.target.value)}
@@ -546,8 +562,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Bespoke Features (Comma-Separated)</label>
+              <label htmlFor="edit-features" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Bespoke Features (Comma-Separated)</label>
               <input
+                id="edit-features"
+                name="edit-features"
                 type="text"
                 value={featuresText}
                 onChange={(e) => setFeaturesText(e.target.value)}
@@ -558,8 +576,10 @@ export function EditVehicleModal({ vehicle, onClose, onSave }: EditVehicleModalP
           </div>
 
           <div className="space-y-1">
-            <label className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Overview Description Memoir</label>
+            <label htmlFor="edit-description" className="text-[#C2C2BB]/50 uppercase text-[9px] tracking-[0.15em] block">Overview Description Memoir</label>
             <textarea
+              id="edit-description"
+              name="edit-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}

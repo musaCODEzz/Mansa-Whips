@@ -95,7 +95,10 @@ export default function InventoryView({
         {/* Search Bar */}
         <div className="md:col-span-6 relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#C2C2BB]/50 w-3.5 h-3.5" />
+          <label htmlFor="inventory-search" className="sr-only">Search inventory</label>
           <input
+            id="inventory-search"
+            name="inventory-search"
             type="text"
             value={search}
             onChange={(e) => {
@@ -156,7 +159,10 @@ export default function InventoryView({
               <tr className="border-b border-white/10 bg-white/[0.01]">
                 <th className="p-4 w-12 text-center">
                   <input
+                    id="select-all-vehicles"
+                    name="select-all-vehicles"
                     type="checkbox"
+                    aria-label="Select all vehicles"
                     checked={paginatedVehicles.length > 0 && paginatedVehicles.every(v => selectedIds.includes(v.id))}
                     onChange={handleSelectAllChange}
                     className="w-4 h-4 bg-transparent border-white/20 focus:ring-0 cursor-pointer accent-white"
@@ -185,7 +191,10 @@ export default function InventoryView({
                     >
                       <td className="p-4 text-center">
                         <input
+                          id={`select-vehicle-${vehicle.id}`}
+                          name={`select-vehicle-${vehicle.id}`}
                           type="checkbox"
+                          aria-label={`Select vehicle ${vehicle.make} ${vehicle.model}`}
                           checked={isChecked}
                           onChange={() => handleCheckboxChange(vehicle.id)}
                           className="w-4 h-4 bg-transparent border-white/20 focus:ring-0 cursor-pointer accent-white"

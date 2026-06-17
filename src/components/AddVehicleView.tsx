@@ -277,8 +277,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Vehicle ID Number (VIN)</label>
+              <label htmlFor="add-vin" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Vehicle ID Number (VIN)</label>
               <input
+                id="add-vin"
+                name="add-vin"
                 type="text"
                 required
                 value={vin}
@@ -289,8 +291,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
             
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Price (KSH)</label>
+              <label htmlFor="add-price" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Price (KSH)</label>
               <input
+                id="add-price"
+                name="add-price"
                 type="number"
                 required
                 value={price}
@@ -303,8 +307,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Make</label>
+              <label htmlFor="add-make" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Make</label>
               <select
+                id="add-make"
+                name="add-make"
                 value={make}
                 onChange={(e) => setMake(e.target.value)}
                 className="w-full bg-[#0B0B0C] border-b border-white/10 focus:border-white/30 text-[#F5F5F0] p-3 font-mono transition-colors border-l-0 border-r-0 border-t-0 focus:ring-0 rounded-none h-12 outline-none uppercase"
@@ -319,8 +325,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Model</label>
+              <label htmlFor="add-model" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Model</label>
               <input
+                id="add-model"
+                name="add-model"
                 type="text"
                 required
                 value={model}
@@ -331,8 +339,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Year</label>
+              <label htmlFor="add-year" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Year</label>
               <input
+                id="add-year"
+                name="add-year"
                 type="number"
                 required
                 value={year}
@@ -353,8 +363,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Transmission</label>
+              <label htmlFor="add-transmission" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Transmission</label>
               <select
+                id="add-transmission"
+                name="add-transmission"
                 value={transmission}
                 onChange={(e) => setTransmission(e.target.value)}
                 className="w-full bg-[#0B0B0C] border-b border-white/10 focus:border-white/30 text-[#F5F5F0] p-3 font-mono transition-colors border-l-0 border-r-0 border-t-0 focus:ring-0 rounded-none outline-none uppercase"
@@ -367,8 +379,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Fuel Type</label>
+              <label htmlFor="add-fuel-type" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Fuel Type</label>
               <select
+                id="add-fuel-type"
+                name="add-fuel-type"
                 value={fuelType}
                 onChange={(e) => setFuelType(e.target.value)}
                 className="w-full bg-[#0B0B0C] border-b border-white/10 focus:border-white/30 text-[#F5F5F0] p-3 font-mono transition-colors border-l-0 border-r-0 border-t-0 focus:ring-0 rounded-none outline-none uppercase"
@@ -381,8 +395,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Engine Description</label>
+              <label htmlFor="add-engine" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Engine Description</label>
               <input
+                id="add-engine"
+                name="add-engine"
                 type="text"
                 value={engine}
                 onChange={(e) => setEngine(e.target.value)}
@@ -392,8 +408,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Exterior Color</label>
+              <label htmlFor="add-color" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Exterior Color</label>
               <input
+                id="add-color"
+                name="add-color"
                 type="text"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
@@ -403,8 +421,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Mileage (KM)</label>
+              <label htmlFor="add-mileage" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Mileage (KM)</label>
               <input
+                id="add-mileage"
+                name="add-mileage"
                 type="number"
                 value={mileage}
                 onChange={(e) => setMileage(e.target.value)}
@@ -428,7 +448,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
           </div>
 
           <div className="relative">
+            <label htmlFor="add-file-upload" className="sr-only">Upload Vehicle Image</label>
             <input 
+              id="add-file-upload"
+              name="add-file-upload"
               type="file" 
               ref={fileInputRef} 
               onChange={handleFileChange} 
@@ -470,10 +493,12 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
           </div>
 
           <div className="space-y-2">
-            <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">
+            <label htmlFor="add-image-url" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">
               Image URL Link for {['Active Banner', 'Interior Angle', 'Engine Bay', 'Chassis Spec'][activeSlotIndex]} (Optional Override)
             </label>
             <input
+              id="add-image-url"
+              name="add-image-url"
               type="url"
               value={images[activeSlotIndex]}
               onChange={(e) => {
@@ -539,10 +564,12 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">URL Slug</label>
+              <label htmlFor="add-slug" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">URL Slug</label>
               <div className="flex items-center bg-white/[0.01] border-b border-white/10 focus-within:border-white/30 transition-colors">
                 <span className="px-3 text-[#C2C2BB]/40 text-[10px] select-none font-mono tracking-wider lowercase">mansawhips.com/inventory/</span>
                 <input
+                  id="add-slug"
+                  name="add-slug"
                   type="text"
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
@@ -553,8 +580,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Marketing Overview Description</label>
+              <label htmlFor="add-description" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Marketing Overview Description</label>
               <textarea
+                id="add-description"
+                name="add-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Craft a compelling executive description narrative for this ultimate luxury asset..."
@@ -564,8 +593,10 @@ export default function AddVehicleView({ onPublish, setActiveTab }: AddVehicleVi
             </div>
 
             <div className="space-y-2">
-              <label className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Bespoke Features (Comma-Separated)</label>
+              <label htmlFor="add-features" className="text-[#C2C2BB]/50 uppercase tracking-[0.15em] text-[9px]">Bespoke Features (Comma-Separated)</label>
               <input
+                id="add-features"
+                name="add-features"
                 type="text"
                 value={featuresText}
                 onChange={(e) => setFeaturesText(e.target.value)}

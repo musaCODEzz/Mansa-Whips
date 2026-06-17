@@ -195,7 +195,10 @@ export default function LeadsView({
       <div className="flex flex-col md:flex-row gap-4 items-center bg-[#0B0B0C] border border-white/10 p-4 rounded-none shadow-2xl">
         <div className="relative w-full md:flex-grow">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#C2C2BB]/50 w-3.5 h-3.5" />
+          <label htmlFor="leads-search" className="sr-only">Search inquiries</label>
           <input
+            id="leads-search"
+            name="leads-search"
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
