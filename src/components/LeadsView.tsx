@@ -4,11 +4,19 @@ import { Inquiry } from '../types';
 
 interface LeadsViewProps {
   inquiries: Inquiry[];
-  setInquiries: React.Dispatch<React.SetStateAction<Inquiry[]>>;
+  onAddManualInquiry: (inquiry: Inquiry) => void;
+  onDeleteInquiry: (id: string) => void;
+  onToggleInquiryStatus: (id: string, currentStatus: 'New' | 'Contacted') => void;
   viewInquiryDetails: (inq: Inquiry) => void;
 }
 
-export default function LeadsView({ inquiries, setInquiries, viewInquiryDetails }: LeadsViewProps) {
+export default function LeadsView({
+  inquiries,
+  onAddManualInquiry,
+  onDeleteInquiry,
+  onToggleInquiryStatus,
+  viewInquiryDetails
+}: LeadsViewProps) {
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState<'All' | 'New' | 'Contacted'>('All');
 
@@ -45,7 +53,7 @@ export default function LeadsView({ inquiries, setInquiries, viewInquiryDetails 
       notes: notes || 'Walk-in showroom visitor interested in immediate test-driving.'
     };
 
-    setInquiries(prev => [newInquiry, ...prev]);
+    onAddManualInquiry(newInquiry);
     
     // Reset Form
     setClientName('');
@@ -58,17 +66,12 @@ export default function LeadsView({ inquiries, setInquiries, viewInquiryDetails 
 
   const handleDeleteInquiry = (id: string, name: string) => {
     if (window.confirm(`Are you sure you want to delete inquiry from ${name}?`)) {
-      setInquiries(prev => prev.filter(inq => inq.id !== id));
+      onDeleteInquiry(id);
     }
   };
 
   const handleToggleStatus = (id: string, current: 'New' | 'Contacted') => {
-    setInquiries(prev => prev.map(inq => {
-      if (inq.id === id) {
-        return { ...inq, status: current === 'New' ? 'Contacted' : 'New' };
-      }
-      return inq;
-    }));
+    onToggleInquiryStatus(id, current);
   };
 
   const filtered = inquiries.filter(inq => {

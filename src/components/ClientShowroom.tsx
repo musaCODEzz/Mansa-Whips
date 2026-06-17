@@ -339,9 +339,9 @@ export default function ClientShowroom({
             onClick={() => { setActiveClientTab('home'); setSelectedVehicleId(null); }}
             className="flex flex-col text-left cursor-pointer outline-none"
           >
-            <h1 className="font-serif text-xl md:text-2xl font-bold tracking-[0.25em] text-[#F5F5F0]">
+            <span className="font-serif text-xl md:text-2xl font-bold tracking-[0.25em] text-[#F5F5F0] block">
               MANSA WHIPS
-            </h1>
+            </span>
             <span className="text-[7.5px] font-mono tracking-[0.4em] uppercase text-white/40 mt-0.5">
               Premium Automotive Showroom
             </span>

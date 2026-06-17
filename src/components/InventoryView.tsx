@@ -4,7 +4,10 @@ import { Vehicle } from '../types';
 
 interface InventoryViewProps {
   vehicles: Vehicle[];
-  setVehicles: React.Dispatch<React.SetStateAction<Vehicle[]>>;
+  onDeleteVehicle: (id: string) => void;
+  onDeleteSelectedVehicles: (ids: string[]) => void;
+  onUpdateVehicleStatus: (id: string, status: 'Available' | 'Reserved' | 'Sold') => void;
+  onMarkSelectedAsSold: (ids: string[]) => void;
   viewVehicleDetails: (v: Vehicle) => void;
   openEditModal: (v: Vehicle) => void;
   setActiveTab: (tab: 'dashboard' | 'inventory' | 'add-vehicle' | 'leads' | 'settings') => void;
@@ -12,7 +15,10 @@ interface InventoryViewProps {
 
 export default function InventoryView({
   vehicles,
-  setVehicles,
+  onDeleteVehicle,
+  onDeleteSelectedVehicles,
+  onUpdateVehicleStatus,
+  onMarkSelectedAsSold,
   viewVehicleDetails,
   openEditModal,
   setActiveTab
@@ -38,33 +44,23 @@ export default function InventoryView({
 
   const handleDeleteSelected = () => {
     if (window.confirm(`Are you sure you want to delete the ${selectedIds.length} selected vehicles?`)) {
-      setVehicles(prev => prev.filter(v => !selectedIds.includes(v.id)));
+      onDeleteSelectedVehicles(selectedIds);
       setSelectedIds([]);
     }
   };
 
   const handleMarkAsSold = () => {
-    setVehicles(prev => prev.map(v => {
-      if (selectedIds.includes(v.id)) {
-        return { ...v, status: 'Sold' };
-      }
-      return v;
-    }));
+    onMarkSelectedAsSold(selectedIds);
     setSelectedIds([]);
   };
 
   const handleStatusChange = (id: string, newStatus: 'Available' | 'Reserved' | 'Sold') => {
-    setVehicles(prev => prev.map(v => {
-      if (v.id === id) {
-        return { ...v, status: newStatus };
-      }
-      return v;
-    }));
+    onUpdateVehicleStatus(id, newStatus);
   };
 
   const handleDeleteVehicle = (id: string, model: string) => {
     if (window.confirm(`Delete ${model} from the virtual inventory?`)) {
-      setVehicles(prev => prev.filter(v => v.id !== id));
+      onDeleteVehicle(id);
       setSelectedIds(prev => prev.filter(item => item !== id));
     }
   };

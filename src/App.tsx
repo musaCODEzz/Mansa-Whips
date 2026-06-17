@@ -108,6 +108,100 @@ export default function App() {
     price: convertPrice(v.price)
   }));
 
+  const API_BASE = 'http://localhost:5001/api';
+
+  // Load from DB on mount with local storage fallback
+  useEffect(() => {
+    fetch(`${API_BASE}/vehicles`)
+      .then(res => {
+        if (!res.ok) throw new Error('API down');
+        return res.json();
+      })
+      .then(data => {
+        const mapped = data.map((d: any) => ({ ...d, id: d.id || d._id }));
+        setVehicles(mapped);
+      })
+      .catch(err => console.warn('Vehicles DB sync skipped (offline/cache fallback active).', err));
+
+    fetch(`${API_BASE}/inquiries`)
+      .then(res => {
+        if (!res.ok) throw new Error('API down');
+        return res.json();
+      })
+      .then(data => {
+        const mapped = data.map((d: any) => ({ ...d, id: d.id || d._id }));
+        setInquiries(mapped);
+      })
+      .catch(err => console.warn('Inquiries DB sync skipped (offline/cache fallback active).', err));
+  }, []);
+
+  const handleDeleteVehicle = (id: string) => {
+    setVehicles(prev => prev.filter(v => v.id !== id));
+    fetch(`${API_BASE}/vehicles/${id}`, { method: 'DELETE' })
+      .catch(err => console.warn('Database offline: Vehicle deleted locally only.', err));
+  };
+
+  const handleDeleteSelectedVehicles = (ids: string[]) => {
+    setVehicles(prev => prev.filter(v => !ids.includes(v.id)));
+    ids.forEach(id => {
+      fetch(`${API_BASE}/vehicles/${id}`, { method: 'DELETE' })
+        .catch(err => console.warn('Database offline: Vehicle deleted locally only.', err));
+    });
+  };
+
+  const handleUpdateVehicleStatus = (id: string, status: 'Available' | 'Reserved' | 'Sold') => {
+    setVehicles(prev => prev.map(v => v.id === id ? { ...v, status } : v));
+    fetch(`${API_BASE}/vehicles/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    }).catch(err => console.warn('Database offline: Status updated locally only.', err));
+  };
+
+  const handleMarkSelectedAsSold = (ids: string[]) => {
+    setVehicles(prev => prev.map(v => ids.includes(v.id) ? { ...v, status: 'Sold' } : v));
+    ids.forEach(id => {
+      fetch(`${API_BASE}/vehicles/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'Sold' })
+      }).catch(err => console.warn('Database offline: Status updated locally only.', err));
+    });
+  };
+
+  const handleToggleInquiryStatus = (id: string, currentStatus: 'New' | 'Contacted') => {
+    const newStatus = currentStatus === 'New' ? 'Contacted' : 'New';
+    setInquiries(prev => prev.map(inq => inq.id === id ? { ...inq, status: newStatus } : inq));
+    fetch(`${API_BASE}/inquiries/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    }).catch(err => console.warn('Database offline: Inquiry status updated locally only.', err));
+  };
+
+  const handleDeleteInquiry = (id: string) => {
+    setInquiries(prev => prev.filter(inq => inq.id !== id));
+    fetch(`${API_BASE}/inquiries/${id}`, { method: 'DELETE' })
+      .catch(err => console.warn('Database offline: Inquiry deleted locally only.', err));
+  };
+
+  const handleAddManualInquiry = (inq: Inquiry) => {
+    setInquiries(prev => [inq, ...prev]);
+    fetch(`${API_BASE}/inquiries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(inq)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('API down');
+      return res.json();
+    })
+    .then(saved => {
+      setInquiries(prev => prev.map(item => item.id === inq.id ? { ...item, id: saved.id || saved._id } : item));
+    })
+    .catch(err => console.warn('Database offline: Inquiry saved locally only.', err));
+  };
+
   const handleRegisterClientLead = (clientName: string, vehicleName: string, email: string, phone: string, notes: string) => {
     const initials = clientName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'VIP';
     const newInq: Inquiry = {
@@ -122,6 +216,20 @@ export default function App() {
       notes
     };
     setInquiries(prev => [newInq, ...prev]);
+
+    fetch(`${API_BASE}/inquiries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newInq)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('API down');
+      return res.json();
+    })
+    .then(saved => {
+      setInquiries(prev => prev.map(item => item.id === newInq.id ? { ...item, id: saved.id || saved._id } : item));
+    })
+    .catch(err => console.warn('Database offline: Inquiry saved locally only.', err));
   };
 
   const handleInquiryFromVehicleModal = (v: Vehicle) => {
@@ -140,6 +248,20 @@ export default function App() {
     };
     setInquiries(prev => [mockInquiry, ...prev]);
     setActiveTab('leads');
+
+    fetch(`${API_BASE}/inquiries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(mockInquiry)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('API down');
+      return res.json();
+    })
+    .then(saved => {
+      setInquiries(prev => prev.map(item => item.id === mockInquiry.id ? { ...item, id: saved.id || saved._id } : item));
+    })
+    .catch(err => console.warn('Database offline: Inquiry saved locally only.', err));
     alert(`Incoming Lead registered for ${v.make} ${v.model}. Redirected to Leads panel.`);
   };
 
@@ -152,14 +274,24 @@ export default function App() {
     }));
     // Sync current modal state
     setSelectedInquiry(prev => prev && prev.id === id ? { ...prev, status: newStatus } : prev);
+
+    fetch(`${API_BASE}/inquiries/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    }).catch(err => console.warn('Database offline: Inquiry status updated locally only.', err));
   };
 
   const handleSaveInquiryComment = (id: string, comment: string) => {
+    const targetInquiry = inquiries.find(inq => inq.id === id);
+    if (!targetInquiry) return;
+    const updatedNotes = `${targetInquiry.notes}\n[memo]: ${comment}`;
+
     setInquiries(prev => prev.map(inq => {
       if (inq.id === id) {
         return {
           ...inq,
-          notes: `${inq.notes}\n[memo]: ${comment}`
+          notes: updatedNotes
         };
       }
       return inq;
@@ -167,8 +299,14 @@ export default function App() {
     // Sync current modal state
     setSelectedInquiry(prev => prev && prev.id === id ? {
       ...prev,
-      notes: `${prev.notes}\n[memo]: ${comment}`
+      notes: updatedNotes
     } : prev);
+
+    fetch(`${API_BASE}/inquiries/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notes: updatedNotes })
+    }).catch(err => console.warn('Database offline: Comment saved locally only.', err));
   };
 
   const handleSaveVehicleEdits = (v: Vehicle) => {
@@ -181,15 +319,23 @@ export default function App() {
     const rate = conversionRates[currency];
     const originalPriceKSH = Math.round(v.price * rate);
 
+    const updatedVehicle = {
+      ...v,
+      price: originalPriceKSH
+    };
+
     setVehicles(prev => prev.map(item => {
       if (item.id === v.id) {
-        return {
-          ...v,
-          price: originalPriceKSH
-        };
+        return updatedVehicle;
       }
       return item;
     }));
+
+    fetch(`${API_BASE}/vehicles/${v.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedVehicle)
+    }).catch(err => console.warn('Database offline: Vehicle edits saved locally only.', err));
   };
 
   const activeInquiries = inquiries.filter(i => {
@@ -262,7 +408,7 @@ export default function App() {
               <DashboardView
                 vehicles={displayedVehicles}
                 inquiries={activeInquiries}
-                setInquiries={setInquiries}
+                onToggleInquiryStatus={handleToggleInquiryStatus}
                 viewVehicleDetails={(v) => setSelectedVehicle(vehicles.find(item => item.id === v.id) || null)}
                 viewInquiryDetails={setSelectedInquiry}
                 setActiveTab={setActiveTab}
@@ -272,7 +418,10 @@ export default function App() {
             {activeTab === 'inventory' && (
               <InventoryView
                 vehicles={displayedVehicles}
-                setVehicles={setVehicles}
+                onDeleteVehicle={handleDeleteVehicle}
+                onDeleteSelectedVehicles={handleDeleteSelectedVehicles}
+                onUpdateVehicleStatus={handleUpdateVehicleStatus}
+                onMarkSelectedAsSold={handleMarkSelectedAsSold}
                 viewVehicleDetails={(v) => setSelectedVehicle(vehicles.find(item => item.id === v.id) || null)}
                 openEditModal={(v) => setEditingVehicle(vehicles.find(item => item.id === v.id) || null)}
                 setActiveTab={setActiveTab}
@@ -288,6 +437,20 @@ export default function App() {
                     inquiriesCount: 0
                   };
                   setVehicles(prev => [newV, ...prev]);
+
+                  fetch(`${API_BASE}/vehicles`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newV)
+                  })
+                  .then(res => {
+                    if (!res.ok) throw new Error('API down');
+                    return res.json();
+                  })
+                  .then(saved => {
+                    setVehicles(prev => prev.map(item => item.id === newV.id ? { ...item, id: saved.id || saved._id } : item));
+                  })
+                  .catch(err => console.warn('Database offline: Vehicle saved locally only.', err));
                 }}
                 setActiveTab={setActiveTab}
               />
@@ -296,7 +459,9 @@ export default function App() {
             {activeTab === 'leads' && (
               <LeadsView
                 inquiries={activeInquiries}
-                setInquiries={setInquiries}
+                onAddManualInquiry={handleAddManualInquiry}
+                onDeleteInquiry={handleDeleteInquiry}
+                onToggleInquiryStatus={handleToggleInquiryStatus}
                 viewInquiryDetails={setSelectedInquiry}
               />
             )}

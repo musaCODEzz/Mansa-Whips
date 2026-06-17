@@ -5,7 +5,7 @@ import { Vehicle, Inquiry } from '../types';
 interface DashboardViewProps {
   vehicles: Vehicle[];
   inquiries: Inquiry[];
-  setInquiries: React.Dispatch<React.SetStateAction<Inquiry[]>>;
+  onToggleInquiryStatus: (id: string, currentStatus: 'New' | 'Contacted') => void;
   viewVehicleDetails: (v: Vehicle) => void;
   viewInquiryDetails: (inq: Inquiry) => void;
   setActiveTab: (tab: 'dashboard' | 'inventory' | 'add-vehicle' | 'leads' | 'settings') => void;
@@ -14,7 +14,7 @@ interface DashboardViewProps {
 export default function DashboardView({
   vehicles,
   inquiries,
-  setInquiries,
+  onToggleInquiryStatus,
   viewVehicleDetails,
   viewInquiryDetails,
   setActiveTab
@@ -28,12 +28,7 @@ export default function DashboardView({
   const ferrari = vehicles.find(v => v.model.includes('F8') || v.make === 'Ferrari') || vehicles[vehicles.length - 1];
 
   const handleInquiryStatusToggle = (id: string, currentStatus: 'New' | 'Contacted') => {
-    setInquiries(prev => prev.map(inq => {
-      if (inq.id === id) {
-        return { ...inq, status: currentStatus === 'New' ? 'Contacted' : 'New' };
-      }
-      return inq;
-    }));
+    onToggleInquiryStatus(id, currentStatus);
   };
 
   return (
