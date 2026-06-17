@@ -113,7 +113,7 @@ export default function App() {
   const pnaFetch = (url: string, options: RequestInit = {}) => {
     return fetch(url, {
       ...options,
-      ...({ targetAddressSpace: 'local' } as any)
+      ...({ targetAddressSpace: 'loopback' } as any)
     });
   };
 
