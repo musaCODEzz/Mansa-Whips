@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background-dark: #050505;
+  --color-surface-base: #0B0B0C;
+  --color-surface-dim: #050505;
+  --color-surface-bright: #2C2C2D;
+  --color-surface-container-lowest: #020202;
+  --color-surface-container-low: #0B0B0C;
+  --color-surface-container: #121213;
+  --color-surface-container-high: #1E1E1F;
+  --color-surface-container-highest: #282829;
+  --color-on-surface: #F5F5F0;
+  --color-on-surface-variant: #C2C2BB;
+  --color-inverse-surface: #F5F5F0;
+  --color-inverse-on-surface: #121213;
+  --color-outline: rgba(255, 255, 255, 0.2);
+  --color-outline-variant: rgba(255, 255, 255, 0.1);
+  --color-surface-tint: #F5F5F0;
+  --color-primary-base: #F5F5F0; /* Clean high-fashion premium off-white active state */
+  --color-on-primary: #050505;
+  --color-primary-container: #ffffff;
+  --color-on-primary-container: #000000;
+  --color-inverse-primary: #121213;
+  --color-secondary-base: #A2A29C;
+  --color-on-secondary: #0A0A0A;
+  --color-secondary-container: #232324;
+  --color-on-secondary-container: #F5F5F0;
+  --color-tertiary-base: #D2D2CA;
+  --color-on-tertiary: #121213;
+  --color-tertiary-container: #2A2A2B;
+  --color-on-tertiary-container: #F5F5F0;
+  --color-error-base: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-primary-fixed: #ffffff;
+  --color-primary-fixed-dim: #F5F5F0;
+  --color-on-primary-fixed: #050505;
+  --color-on-primary-fixed-variant: #2A2A2B;
+  --color-secondary-fixed: #E4E4DF;
+  --color-secondary-fixed-dim: #C2C2BB;
+  --color-on-secondary-fixed: #050505;
+  --color-on-secondary-fixed-variant: #1E1E1F;
+  --color-tertiary-fixed: #F5F5F0;
+  --color-tertiary-fixed-dim: #D2D2CA;
+  --color-on-tertiary-fixed: #050505;
+  --color-on-tertiary-fixed-variant: #1E1E1F;
+  --color-surface-variant: #1A1A1B;
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  background-color: #050505;
+  color: #F5F5F0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar design to match luxury UI */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F5F5F0;
+}
+
+.tonal-card {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tonal-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-header {
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.status-badge {
+  font-family: 'JetBrains Mono', monospace;
+  padding: 3px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #F5F5F0;
+  border-color: #F5F5F0;
+}
+
