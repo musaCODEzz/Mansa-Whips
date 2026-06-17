@@ -108,9 +108,17 @@ export default function App() {
     price: convertPrice(v.price)
   }));
 
-  const API_BASE = 'http://localhost:5001/api';
+  const isLocal = typeof window !== 'undefined' && (
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1' ||
+    window.location.hostname.endsWith('.local')
+  );
+  const API_BASE = isLocal ? 'http://localhost:5001/api' : '';
 
   const pnaFetch = (url: string, options: RequestInit = {}) => {
+    if (!API_BASE) {
+      return Promise.reject(new Error('Local database sync is disabled in production mode.'));
+    }
     return fetch(url, {
       ...options,
       ...({ targetAddressSpace: 'loopback' } as any)
