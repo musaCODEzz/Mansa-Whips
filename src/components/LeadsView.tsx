@@ -106,8 +106,10 @@ export default function LeadsView({
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Client Full Name</label>
+              <label htmlFor="client-name" className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Client Full Name</label>
               <input
+                id="client-name"
+                name="client-name"
                 type="text"
                 required
                 value={clientName}
@@ -117,8 +119,10 @@ export default function LeadsView({
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Interested Vehicle / Spec</label>
+              <label htmlFor="interested-vehicle" className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Interested Vehicle / Spec</label>
               <input
+                id="interested-vehicle"
+                name="interested-vehicle"
                 type="text"
                 required
                 value={vehicleName}
@@ -131,8 +135,10 @@ export default function LeadsView({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Email Address</label>
+              <label htmlFor="client-email" className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Email Address</label>
               <input
+                id="client-email"
+                name="client-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -141,8 +147,10 @@ export default function LeadsView({
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Mobile Number</label>
+              <label htmlFor="client-phone" className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Mobile Number</label>
               <input
+                id="client-phone"
+                name="client-phone"
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -153,8 +161,10 @@ export default function LeadsView({
           </div>
 
           <div className="space-y-1">
-            <label className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Initial inquiry specifications notes</label>
+            <label htmlFor="inquiry-notes" className="text-[#C2C2BB]/50 text-[9px] uppercase tracking-[0.15em]">Initial inquiry specifications notes</label>
             <textarea
+              id="inquiry-notes"
+              name="inquiry-notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Prefers titanium paint. Will pay bank guarantee..."

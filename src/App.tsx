@@ -110,9 +110,16 @@ export default function App() {
 
   const API_BASE = 'http://localhost:5001/api';
 
+  const pnaFetch = (url: string, options: RequestInit = {}) => {
+    return fetch(url, {
+      ...options,
+      ...({ targetAddressSpace: 'local' } as any)
+    });
+  };
+
   // Load from DB on mount with local storage fallback
   useEffect(() => {
-    fetch(`${API_BASE}/vehicles`)
+    pnaFetch(`${API_BASE}/vehicles`)
       .then(res => {
         if (!res.ok) throw new Error('API down');
         return res.json();
@@ -123,7 +130,7 @@ export default function App() {
       })
       .catch(err => console.warn('Vehicles DB sync skipped (offline/cache fallback active).', err));
 
-    fetch(`${API_BASE}/inquiries`)
+    pnaFetch(`${API_BASE}/inquiries`)
       .then(res => {
         if (!res.ok) throw new Error('API down');
         return res.json();
@@ -137,21 +144,21 @@ export default function App() {
 
   const handleDeleteVehicle = (id: string) => {
     setVehicles(prev => prev.filter(v => v.id !== id));
-    fetch(`${API_BASE}/vehicles/${id}`, { method: 'DELETE' })
+    pnaFetch(`${API_BASE}/vehicles/${id}`, { method: 'DELETE' })
       .catch(err => console.warn('Database offline: Vehicle deleted locally only.', err));
   };
 
   const handleDeleteSelectedVehicles = (ids: string[]) => {
     setVehicles(prev => prev.filter(v => !ids.includes(v.id)));
     ids.forEach(id => {
-      fetch(`${API_BASE}/vehicles/${id}`, { method: 'DELETE' })
+      pnaFetch(`${API_BASE}/vehicles/${id}`, { method: 'DELETE' })
         .catch(err => console.warn('Database offline: Vehicle deleted locally only.', err));
     });
   };
 
   const handleUpdateVehicleStatus = (id: string, status: 'Available' | 'Reserved' | 'Sold') => {
     setVehicles(prev => prev.map(v => v.id === id ? { ...v, status } : v));
-    fetch(`${API_BASE}/vehicles/${id}`, {
+    pnaFetch(`${API_BASE}/vehicles/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status })
@@ -161,7 +168,7 @@ export default function App() {
   const handleMarkSelectedAsSold = (ids: string[]) => {
     setVehicles(prev => prev.map(v => ids.includes(v.id) ? { ...v, status: 'Sold' } : v));
     ids.forEach(id => {
-      fetch(`${API_BASE}/vehicles/${id}`, {
+      pnaFetch(`${API_BASE}/vehicles/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'Sold' })
@@ -172,7 +179,7 @@ export default function App() {
   const handleToggleInquiryStatus = (id: string, currentStatus: 'New' | 'Contacted') => {
     const newStatus = currentStatus === 'New' ? 'Contacted' : 'New';
     setInquiries(prev => prev.map(inq => inq.id === id ? { ...inq, status: newStatus } : inq));
-    fetch(`${API_BASE}/inquiries/${id}`, {
+    pnaFetch(`${API_BASE}/inquiries/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus })
@@ -181,13 +188,13 @@ export default function App() {
 
   const handleDeleteInquiry = (id: string) => {
     setInquiries(prev => prev.filter(inq => inq.id !== id));
-    fetch(`${API_BASE}/inquiries/${id}`, { method: 'DELETE' })
+    pnaFetch(`${API_BASE}/inquiries/${id}`, { method: 'DELETE' })
       .catch(err => console.warn('Database offline: Inquiry deleted locally only.', err));
   };
 
   const handleAddManualInquiry = (inq: Inquiry) => {
     setInquiries(prev => [inq, ...prev]);
-    fetch(`${API_BASE}/inquiries`, {
+    pnaFetch(`${API_BASE}/inquiries`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(inq)
@@ -217,7 +224,7 @@ export default function App() {
     };
     setInquiries(prev => [newInq, ...prev]);
 
-    fetch(`${API_BASE}/inquiries`, {
+    pnaFetch(`${API_BASE}/inquiries`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newInq)
@@ -249,7 +256,7 @@ export default function App() {
     setInquiries(prev => [mockInquiry, ...prev]);
     setActiveTab('leads');
 
-    fetch(`${API_BASE}/inquiries`, {
+    pnaFetch(`${API_BASE}/inquiries`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(mockInquiry)
@@ -275,7 +282,7 @@ export default function App() {
     // Sync current modal state
     setSelectedInquiry(prev => prev && prev.id === id ? { ...prev, status: newStatus } : prev);
 
-    fetch(`${API_BASE}/inquiries/${id}`, {
+    pnaFetch(`${API_BASE}/inquiries/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus })
@@ -302,7 +309,7 @@ export default function App() {
       notes: updatedNotes
     } : prev);
 
-    fetch(`${API_BASE}/inquiries/${id}`, {
+    pnaFetch(`${API_BASE}/inquiries/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ notes: updatedNotes })
@@ -331,7 +338,7 @@ export default function App() {
       return item;
     }));
 
-    fetch(`${API_BASE}/vehicles/${v.id}`, {
+    pnaFetch(`${API_BASE}/vehicles/${v.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedVehicle)
@@ -438,7 +445,7 @@ export default function App() {
                   };
                   setVehicles(prev => [newV, ...prev]);
 
-                  fetch(`${API_BASE}/vehicles`, {
+                  pnaFetch(`${API_BASE}/vehicles`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newV)

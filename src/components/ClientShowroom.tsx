@@ -1251,8 +1251,10 @@ export default function ClientShowroom({
                 <form onSubmit={handleContactSubmit} className="space-y-4 font-mono text-xs">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                     <div className="space-y-1.5">
-                      <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Client Name</label>
+                      <label htmlFor="memo-client-name" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Client Name</label>
                       <input 
+                        id="memo-client-name"
+                        name="memo-client-name"
                         type="text"
                         required
                         value={contactName}
@@ -1262,8 +1264,10 @@ export default function ClientShowroom({
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Mobile Number</label>
+                      <label htmlFor="memo-client-phone" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Mobile Number</label>
                       <input 
+                        id="memo-client-phone"
+                        name="memo-client-phone"
                         type="text"
                         required
                         value={contactPhone}
@@ -1275,8 +1279,10 @@ export default function ClientShowroom({
                   </div>
 
                   <div className="space-y-1.5 text-left">
-                    <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Email Address (Optional)</label>
+                    <label htmlFor="memo-client-email" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Email Address (Optional)</label>
                     <input 
+                      id="memo-client-email"
+                      name="memo-client-email"
                       type="email"
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
@@ -1286,8 +1292,10 @@ export default function ClientShowroom({
                   </div>
 
                   <div className="space-y-1.5 text-left">
-                    <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Inquiry Memorandum</label>
+                    <label htmlFor="memo-client-notes" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Inquiry Memorandum</label>
                     <textarea 
+                      id="memo-client-notes"
+                      name="memo-client-notes"
                       required
                       value={contactMsg}
                       onChange={(e) => setContactMsg(e.target.value)}
@@ -1393,8 +1401,10 @@ export default function ClientShowroom({
             <form onSubmit={handleBookingSubmit} className="space-y-4 text-xs">
               
               <div className="space-y-1">
-                <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Your full Name</label>
+                <label htmlFor="booking-client-name" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Your full Name</label>
                 <input 
+                  id="booking-client-name"
+                  name="booking-client-name"
                   type="text"
                   required
                   value={leadName}
@@ -1406,8 +1416,10 @@ export default function ClientShowroom({
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Mobile phone No.</label>
+                  <label htmlFor="booking-client-phone" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Mobile phone No.</label>
                   <input 
+                    id="booking-client-phone"
+                    name="booking-client-phone"
                     type="text"
                     required
                     value={leadPhone}
@@ -1417,8 +1429,10 @@ export default function ClientShowroom({
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Email Address</label>
+                  <label htmlFor="booking-client-email" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Email Address</label>
                   <input 
+                    id="booking-client-email"
+                    name="booking-client-email"
                     type="email"
                     value={leadEmail}
                     onChange={(e) => setLeadEmail(e.target.value)}
@@ -1430,8 +1444,10 @@ export default function ClientShowroom({
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Select Date</label>
+                  <label htmlFor="booking-client-date" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Select Date</label>
                   <input 
+                    id="booking-client-date"
+                    name="booking-client-date"
                     type="date"
                     required
                     value={leadDate}
@@ -1440,8 +1456,10 @@ export default function ClientShowroom({
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Select Time</label>
+                  <label htmlFor="booking-client-time" className="text-[9px] uppercase tracking-[0.15em] text-[#C2C2BB]/40 font-semibold">Select Time</label>
                   <input 
+                    id="booking-client-time"
+                    name="booking-client-time"
                     type="time"
                     required
                     value={leadTime}

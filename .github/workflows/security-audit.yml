@@ -1,0 +1,32 @@
+name: Security Audit Scan
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  security-audit:
+    name: Dependency Vulnerability Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Audit Frontend Dependencies
+        run: |
+          echo "Auditing client-side dependencies..."
+          npm audit --audit-level=moderate
+
+      - name: Audit Backend Dependencies
+        run: |
+          echo "Auditing backend-side dependencies..."
+          cd server
+          npm audit --audit-level=moderate
