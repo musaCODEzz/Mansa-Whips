@@ -1,0 +1,7 @@
+# Robots.txt configuration for Mansa Whips
+# Protects against crawl budget waste from dynamic vehicle search filters
+
+User-agent: *
+Disallow: /*?*
+Allow: /*?v=
+Sitemap: http://localhost:3000/sitemap.xml
